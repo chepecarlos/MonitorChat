@@ -1,12 +1,16 @@
 #!/usr/bin/env pytho3
 import PySimpleGUI as sg
 
+import MiYoutube
+
 cprint = sg.cprint
 
 LineaSuper = '-super-'
 LineaMiembro = '-mienbro-'
 LineaNormal = '-nomral-'
 LineaDepurar = '-depurar-'
+
+Chat = MiYoutube.MiYoutube()
 
 layout = [
             [sg.Text('ID Striming Youtube:'), sg.InputText(key='-youtube-', size=(20, 1)), sg.Button('Conectar'), sg.Text('Estado ??', key='-estado-')],
@@ -43,8 +47,10 @@ while True:
         print('ID', values['-ID-'])
         cprint(values['-ID-'], key=LineaNormal)
     elif event == 'Conectar':
-        print('ID', values['-youtube-'])
-        cprint(values['-youtube-'])
-    # print(event)
+
+        Chat.Conectar(values['-youtube-'])
+
+    if Chat.conectado:
+        Chat.Actualizar()
 
 window.close()
